@@ -22,9 +22,21 @@ class CarritoControlador extends Carrito {
         $this->Cargar($this->ID_CLIENTE);
     }
 
-    public function Agregarproducto(){
+    public function buscartotal(){
+        $this->calculartotal($this->ID_CLIENTE);
+    }
+
+    public function Agregarproductos(){
         $this->Añadir($this->ID_PRODUCTOS, $this->cantidadCompra, $this->ID_CLIENTE);
         echo "Se agrego el producto.";
+    }
+
+    public function vaciartodo(){
+        $this->vaciar($this->ID_CLIENTE);
+    }
+
+    public function Comprar(){
+        $this->Compra($this->ID_CLIENTE);
     }
 }
 

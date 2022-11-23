@@ -48,11 +48,16 @@ include('./templates/header.php');
             <?php
                 if ($_SESSION['ID_ROL']==1){
             ?>
-                <button type="button" id="aCarrito" class="btn btn-primary btn-info" data-bs-toggle="modal" data-bs-target="#cotModal"> Agregar al carrito </button>
+            <div id="botones">            
                 <button type="button" id="aListamodal" class="btn btn-primary btn-info" data-bs-toggle="modal" data-bs-target="#listModal"> Agregar a lista </button>
                 <button type="button" id="facebook" class="btn btn-primary " onclick="compartir_producto()"> Compartir en facebook </button>
+            </div>
             <?php
-                } 
+                } else if ($_SESSION['ID_ROL']==2){
+            ?>
+                <button type="button" id="EditarJuguete" class="btn btn-primary btn-info"> Editar </button>
+            <?php
+                }
             ?>
     </div>
     <hr>
@@ -157,7 +162,25 @@ include('./templates/header.php');
                 </div>
             </form>
         </div>
-    </div>
+    </div> 
+    <div class="modal fade" id="añadirCarrModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title Titulos" id="exampleModalLabel"> Unidades a comprar </h5>
+                    </div>
+                <div class="modal-body">
+                    <input type="number" id="acomprar" name="acomprar" min="1"  value="1">'
+                </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn bg-warning" data-bs-dismiss="modal"> Cerrar </button>
+                        <input type="submit" id="AñadirAlCarrito" class="btn btn-primary btn-info" value="Añadir al carrito " name="" >
+                    </div>
+                </div>
+        </div>
+    </div> 
+        
+
 
     <div class="modal fade" id="listModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

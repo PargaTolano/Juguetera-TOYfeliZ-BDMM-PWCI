@@ -162,12 +162,12 @@ BEGIN
 		SELECT ID_PRODUCTO, nombre, descripcion,tipoVenta, valoracion, precio, cantidad, ID_VENDEDOR, icono, vendedor, categorias, video, imagenes FROM viewJuguetesnoAUTORIZ;
     end if;
 	if pAccion = 6 then
-		SELECT ID_PRODUCTO, nombre, tipoVenta, precio, ID_VENDEDOR, icono, vendedor, ventas FROM viewJuguetesPorVenta;
+
+
+		SELECT ID_PRODUCTO, nombre, tipoVenta, precio, ID_VENDEDOR, icono, vendedor, ventas FROM viewJuguetesPorVenta order by ventas desc;
     end if;
 END =)
 delimiter ;
-
-
 
 
 
@@ -189,12 +189,6 @@ BEGIN
 END =)
 delimiter ;
 
-
-
-
-
-
-
 delimiter &&
 CREATE procedure sp_infoJUGUETE (pAccion tinyint, pID_PRODUCTO int)
 BEGIN
@@ -215,8 +209,6 @@ BEGIN
 END &&
 delimiter ;
 
-
-
 delimiter &&
 CREATE procedure sp_comentarios (pAccion tinyint, pID_PRODUCTO int, Pcomentario VARCHAR(500), Pcalificación INT, pID_USUARIO INT)
 BEGIN
@@ -234,37 +226,47 @@ BEGIN
 END &&
 delimiter ;
 
-
-
-
-
-
-delimiter =)
-CREATE procedure sp_gestionCarrito (pAccion	tinyint,	pID_PRODUCTO INT, pID_CLIENTE INT, PprecioPagar FLOAT, Pestatus BIT, PcantidadCompra INT)
+delimiter ==
+CREATE procedure sp_gestionCarrito (pAccion	tinyint, pID_PRODUCTO INT, pID_CLIENTE INT, PprecioPagar FLOAT, PcantidadCompra INT)
 BEGIN
-DECLARE ID_CARRITO INT;
+DECLARE ID_CARRITO_tmp INT; declare tipoventa_tmp VARCHAR(30);
 Set ID_CARRITO_tmp = (SELECT ID_CARRITO from carrito WHERE ID_CLIENTE = pID_CLIENTE);
+Set tipoventa_tmp = (SELECT tipoVenta from juguetes where ID_PRODUCTO = pID_PRODUCTO );
 #Altas
 	if pAccion = 1 then
-		INSERT into poductoscarrito (ID_CARRITO, ID_JUGUETE, cantidadCompra) VALUES (ID_CARRITO_tmp, pID_PRODUCTO, 1);
+		if  tipoventa_tmp = 'Cotizar' then
+			INSERT into poductoscarrito (ID_CARRITO, ID_JUGUETE, ID_CLIENTE, cantidadCompra, preciocotizado) VALUES (ID_CARRITO_tmp, pID_PRODUCTO, pID_CLIENTE, PcantidadCompra, 1);
+        end if;
+        if tipoventa_tmp = 'Vender' then
+			INSERT into poductoscarrito (ID_CARRITO, ID_JUGUETE, ID_CLIENTE, cantidadCompra, preciocotizado) VALUES (ID_CARRITO_tmp, pID_PRODUCTO, pID_CLIENTE, PcantidadCompra, 0);
+        end if;
     end if;
 #Seleccion
-    if pAccion = 1 then
-		SELECT (ID_CARRITO, ID_JUGUETE, cantidadCompra) FROM poductoscarrito  VALUES (ID_CARRITO_tmp, pID_PRODUCTO, 1);
+    if pAccion = 2 then
+		SELECT ID_CARRITO, ID_JUGUETE, preciocotizado, cantidadCompra, nombre, precio, icono, cantidad FROM viewCarrito WHERE  ID_CLIENTE = pID_CLIENTE and estatus = 0;
+        
     end if;
 #Compra
-    if pAccion = 2 then
+    if pAccion = 3 then
+		UPDATE poductoscarrito set estatus = 1 where ID_CLIENTE = pID_CLIENTE;
+		DELETE FROM poductoscarrito where ID_CLIENTE = pID_CLIENTE;
+    end if;
+#Totalprecio
+	if pAccion = 4 then
+		SELECT  f_precioAPagar(pID_CLIENTE) as total;
+    end if;
+#Vaciar
+	if pAccion = 5 then
+		DELETE FROM poductoscarrito where ID_CLIENTE = pID_CLIENTE;
+    end if;
+#Eliminar producto///
+	if pAccion = 6 then
 		INSERT into poductoscarrito (ID_CARRITO, ID_JUGUETE, cantidadCompra) VALUES (ID_CARRITO_tmp, pID_PRODUCTO, 1);
     end if;
-END =)
+END ==
 delimiter ;
 
-
-CREATE VIEW viewHistorialCliente AS
-SELECT a.ID_VENTA, a.fechaCOMPRA, a.cantidadCompradaVendida, a.precioFinalProducto, a.ID_CLIENTE, b.nombre, b.ID_PRODUCTO,  group_concat(distinct e.nombre ) categoria
-		FROM pedidosyventas a INNER JOIN juguetes b ON a.ID_JUGUETE = b.ID_PRODUCTO INNER JOIN categoriajuguete c ON a.ID_JUGUETE = c.ID_JUGUETE
-		INNER JOIN  categorias e ON e.ID_CATEGORIA = c.ID_CATEGORIA group by 1;
-        
+    
 delimiter &&
 CREATE procedure sp_gestionHistorial (pAccion	tinyint, Pdesde VARCHAR(100), Phasta VARCHAR(100), pID_USUARIO int)
 BEGIN
@@ -286,7 +288,3 @@ BEGIN
     end if;
 END &&
 delimiter ;
-
-SELECT a.ID_VENTA, a.fechaCOMPRA, a.cantidadCompradaVendida, a.precioFinalProducto, a.ID_CLIENTE, b.nombre, b.cantidad, b.ID_PRODUCTO, b.valoracion, group_concat(distinct e.nombre ) categoria
-		FROM pedidosyventas a INNER JOIN juguetes b ON a.ID_JUGUETE = b.ID_PRODUCTO INNER JOIN categoriajuguete c ON a.ID_JUGUETE = c.ID_JUGUETE
-		INNER JOIN  categorias e ON e.ID_CATEGORIA = c.ID_CATEGORIA WHERE a.ID_VENDEDOR =  pID_USUARIO group by 1;

@@ -80,7 +80,7 @@ $(document).ready(function(){
     $(".VER").click(function(){
         window.location.href = "producto.php?ID_PRODUCTO=" + $(this).val() ;
     });
-    
+   
     $("#form_listas").submit(function(event){
         event.preventDefault();
         $.ajax({

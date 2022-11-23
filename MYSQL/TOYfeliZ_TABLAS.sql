@@ -138,9 +138,9 @@ FOREIGN KEY (ID_CLIENTE) REFERENCES usuarios (ID_USUARIO),
 ID_JUGUETE INT NOT NULL  COMMENT 'Identificador del juguete añadido al carrito.',
 FOREIGN KEY (ID_JUGUETE) REFERENCES juguetes (ID_PRODUCTO),
 cantidadCompra INT NOT NULL  COMMENT 'Cantidad de unidades del juguete añadidas al carrito.' ,
-preciocotizado float
+preciocotizado float,
+estatus Bit default 0 comment '0 no ha sido comprado, 1 ya se compró'
 );
-
 
 CREATE TABLE if not exists cotizaciones (
 ID_JUGUETE INT NOT NULL COMMENT 'Identificador de la cotizacion.',
