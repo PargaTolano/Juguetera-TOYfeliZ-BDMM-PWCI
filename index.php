@@ -24,21 +24,20 @@ session_start();
 <body style=" overflow: hidden">
     <!-- landing page -->
     <div class="container-fluid ">
-        <div class = "row landing-page">
-            <div class="col-6" >
-                <img src="images/wallpaper2.png">
+        <div class = "row vh-100 landing-page">
+            <div class="col-6 d-none d-sm-none d-md-block p-0" >
+                <img class="w-100 h-100" style="object-fit: cover;" src="images/wallpaper2.png">
             </div>
-            <div class="col-6 bg-light" >
+            <div class="col-12 col-md-6 bg-light p-0" >
                 <img width="100px" class="py-2" src="images/logo.png">
-                <div style="padding: 80px 100px;" class=" text-center">
+                <div class="text-center px-2 px-md-5 py-5">
                     <h1 class ="Titulos"> JUGUETERIA TOYfeliZ </h1>
                     <h4 style="width: 100%; margin-bottom: 20px; color: rgb(81, 95, 95);"> En TZ encontrarás todo tipo de juguetes para tus hijos al mejor precio y de excelente calidad.</h4>
-                    <button type="button" id="Registrase" class="btn btn-primary btn-info btn_titulo" style="width: 100%; height: 100px; margin-bottom: 20px;" data-bs-toggle="modal" data-bs-target="#registroModal" >REGISTRATE AQUI</button>
-                    <label style="width: 100%; margin-bottom: 20px; color: rgb(81, 95, 95);"> Al registrarte, aceptas los Términos de servicio y la Política de privacidad, incluida la política de Uso de Cookies.</label>
+                    <button type="button" id="Registrase" class="btn btn-primary btn-info btn_titulo w-100 mb-4" data-bs-toggle="modal" data-bs-target="#registroModal" >REGISTRATE AQUI</button>
+                    <label class="w-100 mb-4" style="color: rgb(81, 95, 95);"> Al registrarte, aceptas los Términos de servicio y la Política de privacidad, incluida la política de Uso de Cookies.</label>
                     <hr>
-                    <label style="width: 100%; margin-bottom: 20px; color: rgb(81, 95, 95);"> ¿Ya tienes una cuenta? inicia sesión </label>
-                    <br> <br>
-                    <button type="button" id="inciarSesion" class="btn btn-primary btn-info" style="width: 100%; margin-bottom: 20px;" data-bs-toggle="modal" data-bs-target="#exampleModal"> Inicia sesión </button>
+                    <label class="w-100 mb-4" style="color: rgb(81, 95, 95);"> ¿Ya tienes una cuenta? inicia sesión </label>
+                    <button type="button" id="inciarSesion" class="btn btn-primary btn-info w-100 mb-4" data-bs-toggle="modal" data-bs-target="#exampleModal"> Inicia sesión </button>
                 </div>
             </div>
         </div>

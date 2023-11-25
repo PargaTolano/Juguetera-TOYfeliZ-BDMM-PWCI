@@ -2,7 +2,7 @@ USE TOYfeliZ;
 
 #-----------------------------PROCEDURES----------------------------------
 
-
+DROP PROCEDURE IF EXISTS sp_gestionUsuarios;
 delimiter =)
 CREATE procedure sp_gestionUsuarios (	pAccion	tinyint,	PID_USUARIO INT,	Pnombre VARCHAR(50),	Papellido VARCHAR(50),	Pnacimiento VARCHAR(45),
 				Pusuario VARCHAR(20),	Pcorreo VARCHAR(100),	Pcontrasenia VARCHAR(40),	Psexo VARCHAR(10),	Pprivacidad VARCHAR(10),	Pfoto LONGBLOB,    pID_ROL INT )
@@ -24,6 +24,10 @@ DECLARE id_user	INT; DECLARE id_rol_tem INT;
 #Identificar
 	if pAccion = 2 then
 		SELECT contrasenia, usuario, ID_ROL, ID_USUARIO, estatus FROM usuarios WHERE correo = Pcorreo;
+    end if;
+# Identificar Correo no le pertenece a este usuario
+    if pAccion = 8 then
+		SELECT contrasenia, usuario, ID_ROL, ID_USUARIO, estatus FROM usuarios WHERE correo = Pcorreo AND ID_USUARIO <> PID_USUARIO;
     end if;
 #Verificar privacidad Creo que esta podria ir a function
     if pAccion = 3 then
@@ -48,9 +52,7 @@ DECLARE id_user	INT; DECLARE id_rol_tem INT;
 END =)
 delimiter ;
 
-
-
-
+DROP PROCEDURE IF EXISTS sp_GetCorreoContra;
 delimiter =)
 CREATE procedure sp_GetCorreoContra (	pAccion	tinyint, Pusuario VARCHAR(20),	Pcorreo VARCHAR(100), pID_USUARIO int)
 BEGIN
@@ -72,6 +74,7 @@ END =)
 delimiter ;
 CALL sp_GetCorreoContra (3, null, 'rc', null);
 
+DROP PROCEDURE IF EXISTS sp_gestionCategorias;
 delimiter =)
 CREATE procedure  sp_gestionCategorias (	pAccion	tinyint,	PID_CATEGORIA INT,	Pnombre VARCHAR(50),	Pdescripcion VARCHAR(500),	pID_VENDEDOR INT)
 BEGIN
@@ -87,6 +90,7 @@ BEGIN
 END =)
 delimiter ;
 
+DROP PROCEDURE IF EXISTS sp_gestionListas;
 delimiter %%
 CREATE procedure  sp_gestionListas (pAccion	tinyint,	PID_LISTA INT,	Pnombre VARCHAR(50),	Pdescripcion VARCHAR(500),	 pID_CLIENTE INT, Pprivacidad VARCHAR(50),Pimagenes LONGBLOB, pID_PRODUCTO INT)
 BEGIN
@@ -122,13 +126,7 @@ BEGIN
 END %%
 delimiter ;
 
-
-
-
-
-
-
-
+DROP PROCEDURE IF EXISTS sp_autorizar;
 delimiter %%
 CREATE procedure  sp_autorizar (pID_PRODUCTO INT)
 BEGIN
@@ -136,6 +134,7 @@ BEGIN
 END %%
 delimiter ;
 
+DROP PROCEDURE IF EXISTS sp_gestionJuguetes;
 delimiter =)
 CREATE procedure sp_gestionJuguetes (pAccion	tinyint,	pID_PRODUCTO INT,	Pnombre VARCHAR(100),	Pdescripcion VARCHAR(500),    PtipoVenta VARCHAR(30),    
 				 Pvaloracion INT,    Pprecio FLOAT,    Pcantidad INT,	pID_VENDEDOR INT, Picono LONGBLOB, Pcategorias INT, Pvideos VARCHAR(500), Pimagenes LONGBLOB,
@@ -169,10 +168,7 @@ BEGIN
 END =)
 delimiter ;
 
-
-
-
-
+DROP PROCEDURE IF EXISTS sp_gestionBusqueda;
 delimiter =)
 CREATE procedure sp_gestionBusqueda (pAccion	tinyint, pBusqueda varchar(50))
 BEGIN
@@ -189,6 +185,7 @@ BEGIN
 END =)
 delimiter ;
 
+DROP PROCEDURE IF EXISTS sp_infoJUGUETE;
 delimiter &&
 CREATE procedure sp_infoJUGUETE (pAccion tinyint, pID_PRODUCTO int)
 BEGIN
@@ -209,6 +206,7 @@ BEGIN
 END &&
 delimiter ;
 
+DROP PROCEDURE IF EXISTS sp_comentarios;
 delimiter &&
 CREATE procedure sp_comentarios (pAccion tinyint, pID_PRODUCTO int, Pcomentario VARCHAR(500), Pcalificación INT, pID_USUARIO INT)
 BEGIN
@@ -226,6 +224,7 @@ BEGIN
 END &&
 delimiter ;
 
+DROP PROCEDURE IF EXISTS sp_gestionCarrito;
 delimiter ==
 CREATE procedure sp_gestionCarrito (pAccion	tinyint, pID_PRODUCTO INT, pID_CLIENTE INT, PprecioPagar FLOAT, PcantidadCompra INT)
 BEGIN
@@ -266,7 +265,7 @@ Set tipoventa_tmp = (SELECT tipoVenta from juguetes where ID_PRODUCTO = pID_PROD
 END ==
 delimiter ;
 
-    
+DROP PROCEDURE IF EXISTS sp_gestionHistorial;
 delimiter &&
 CREATE procedure sp_gestionHistorial (pAccion	tinyint, Pdesde VARCHAR(100), Phasta VARCHAR(100), pID_USUARIO int)
 BEGIN

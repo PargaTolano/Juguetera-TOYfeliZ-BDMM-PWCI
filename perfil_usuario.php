@@ -6,7 +6,7 @@ include('./templates/header.php');
 <section>
 <br>
     <div class="container bg-light text-center" style="padding: 30px">
-        <img src=""  style="border-radius: 50%;"  width = 200px height =200px alt="" id ="foto_pefil" name="foto">
+        <img src=""  style="border-radius: 50%; object-fit: cover;"  width = 200px height =200px alt="" id ="foto_pefil" name="foto">
         <div style="padding: 20px" id="perfilbuttons">
 
         </div>

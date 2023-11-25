@@ -53,6 +53,7 @@ function infoperfil(){
         url: './controlador/perfil.php',
         async: false,
         success: function(result){
+            console.log('RESULTADO PERFIL\n'.repeat(300), result);
             var data = JSON.parse(result);
             if (data[0].usuario != $("#nombre_usuario").html()){
                 $("#USER").html(data[0].usuario);
@@ -147,5 +148,16 @@ $(document).ready(function(){
                     alert("Error en el php" + result);
                 }
             })        
+    });
+
+
+    // preview
+    $('#foto').change(function(event) {
+      let objectURL = 'images/Logo - copia.png';
+      const [file] = this.files;
+      if (file) { 
+        objectURL = URL.createObjectURL(file);
+      }
+      $('#foto_pefil').attr('src', objectURL);
     });
 });

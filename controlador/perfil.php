@@ -9,9 +9,9 @@ if (isset($_POST['action'])) {
     else if ($action == 'getInfouser')
         getInfouser();
     else if ($action == 'desactivar')
-     desactivar();
+        desactivar();
     else if ($action == 'getPERFIL')
-    getPERFIL();
+        getPERFIL();
 }
 
 else {
@@ -43,7 +43,11 @@ else {
     $correo = $_POST['edcorreoUsuario'];
     $foto = $_realImage;
     $sexo = $_POST['Sexo'];
-    $privacidad = $_POST['Privacidad'];
+    // optional fields
+    $privacidad = null;
+    if (isset($_POST['Privacidad'])) {
+      $privacidad = $_POST['Privacidad'];
+    }
 
     session_start();
 

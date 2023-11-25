@@ -5,8 +5,8 @@ class Dbh {
         try{
             $server = "localhost";
             $username = "root";
-            $password = "root";
-            $database = "Toyfeliz";
+            $password = "";
+            $database = "TOYfeliZ";
 
             $conn = new PDO("mysql:host=$server;dbname=$database;",$username,$password);
             return $conn;

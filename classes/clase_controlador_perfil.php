@@ -25,22 +25,21 @@ class PerfilControlador extends PerfilActions {
         $this->foto= $foto;
         $this->ID_ROL= $ID_ROL;
         $this->ID_USUARIO= $ID_USUARIO;
-
     }
 
     public function ActualizarInfo(){
-        if ($this->inputVacio() == false ){
+        if ($this->inputVacio()){
             echo "Llena todos los datos";
             //header ("location: ../index.php?error=inputVacio");
             exit();
             
         }
-        if ($this->correoUnico() == false ){
+        if (!$this->correoUnico() ){
             echo "El correo ya existe.";
             //header ("location: ../index.php?error=correoUnico");
             exit();
         }
-        if ($this->usuarioUnico() == false ){
+        if (!$this->usuarioUnico() ){
             echo "Nombre de usuario en uso.";
             //header ("location: ../index.php?error=correoUnico");
             exit();
@@ -59,33 +58,22 @@ class PerfilControlador extends PerfilActions {
     }
 
     private function inputVacio(){
-        $check;
-        if (empty($this->nombre) || empty ($this->apellido) || empty ($this->nacimiento) ||empty ($this->usuario)  || empty ($this->correo) || empty ($this->sexo) || empty ($this->privacidad) || empty ($this->foto) || empty ($this->ID_ROL)){
-            $check = false;
-        }else {
-            $check = true;
-        }
-        return $check;
+        return empty($this->nombre) || 
+                empty ($this->apellido) || 
+                empty ($this->nacimiento) ||
+                empty ($this->usuario)  || 
+                empty ($this->correo) || 
+                empty ($this->sexo) ||  
+                empty ($this->foto) || 
+                empty ($this->ID_ROL);
     }
     
     private function correoUnico (){
-        $check;
-        if (!$this->RevisarCorreo($this->correo, $this->ID_USUARIO)){
-            $check = false;
-        }else {
-            $check = true;
-        }
-        return $check;
+        return $this->RevisarCorreo($this->correo, $this->ID_USUARIO);
     }
 
     private function usuarioUnico (){
-        $check;
-        if (!$this->RevisarUsuario($this->usuario, $this->ID_USUARIO)){
-            $check = false;
-        }else {
-            $check = true;
-        }
-        return $check;
+        return $this->RevisarUsuario($this->usuario, $this->ID_USUARIO);
     }
 }
 

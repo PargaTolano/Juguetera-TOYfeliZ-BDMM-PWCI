@@ -11,7 +11,7 @@ class InicioSesionControlador extends Login {
     }
     
     public function iniciarSesion(){
-        if ($this->inputVacio() == false) {
+        if ($this->inputVacio()) {
             //header ("location: ../index.php?error=inputVacio");
             echo "Campos vacios";
             exit();
@@ -21,13 +21,7 @@ class InicioSesionControlador extends Login {
     }
 
     private function inputVacio(){
-        $check;
-        if (empty ($this->contrasenia) || empty ($this->correo)){
-            $check = false;
-        }else {
-            $check = true;
-        }
-        return $check;
+        return empty($this->contrasenia) || empty($this->correo);
     }
 }
 

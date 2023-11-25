@@ -22,58 +22,40 @@ $(document).ready(function(){
         
     });
     $("#form_registro").submit(function(event){
-        if (campoVacio()){
-            if (validarEmail()){
-                if(validarContraseña()){
-                    if(validarFecha()){
-                        event.preventDefault();
-                        $.ajax({
-                            data: new FormData(this),
-                            url: './controlador/registro.php',
-                            type: 'POST',
-                            cache: false,
-                            dataType: 'json',
-                            contentType: false, /*se envia el formato tal cual está*/
-                            processData: false, /*acepta el formato sea cual sea en el que esté hecho*/
-                            success: function(result) {
-                                if (result == "1"){
-                                    alert("Hay algun campo vacío.");
+      event.prevenDefault();
+      if (campoVacio() && validarEmail() && validarContraseña() && validarFecha()) {
+        $.ajax({
+            data: new FormData(this),
+            url: './controlador/registro.php',
+            type: 'POST',
+            cache: false,
+            dataType: 'json',
+            contentType: false, /*se envia el formato tal cual está*/
+            processData: false, /*acepta el formato sea cual sea en el que esté hecho*/
+            success: function(result) {
+                if (result == "1"){
+                    alert("Hay algun campo vacío.");
 
-                                }
-                                else if (result == "2"){
-                                    alert("El correo ya existe.");
-
-                                }
-                                else if (result == "3"){
-                                    alert("El usuario ya existe.");
-
-                                }
-                                else if (result == "4"){
-                                    alert("exito, te registraste en TZ")
-                                    window.location.href = "index.php";
-                                }                                
-                            }, error: function(data){
-                                alert("Error en el php" + data);
-                                console.log(data);
-                            }
-                        })
-                    }
-                    else{
-                        event.preventDefault();
-                    }
                 }
-                else{
-                    event.preventDefault();
+                else if (result == "2"){
+                    alert("El correo ya existe.");
+
                 }
+                else if (result == "3"){
+                    alert("El usuario ya existe.");
+
+                }
+                else if (result == "4"){
+                    alert("exito, te registraste en TZ")
+                    window.location.href = "index.php";
+                }                                
+            }, error: function(data){
+                alert(JSON.stringify(data));
+                alert("Error en el php" + data);
+                console.log(data);
             }
-            else
-            {
-                event.preventDefault();
-            }
-        }
-        else{
-            event.preventDefault();
-        }
+        })
+      }
     });      
 });
 
