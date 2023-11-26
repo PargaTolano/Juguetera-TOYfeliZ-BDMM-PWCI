@@ -53,7 +53,6 @@ function infoperfil(){
         url: './controlador/perfil.php',
         async: false,
         success: function(result){
-            console.log('RESULTADO PERFIL\n'.repeat(300), result);
             var data = JSON.parse(result);
             if (data[0].usuario != $("#nombre_usuario").html()){
                 $("#USER").html(data[0].usuario);

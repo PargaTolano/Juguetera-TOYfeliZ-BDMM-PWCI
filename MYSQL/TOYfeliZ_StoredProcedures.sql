@@ -29,6 +29,10 @@ DECLARE id_user	INT; DECLARE id_rol_tem INT;
     if pAccion = 8 then
 		SELECT contrasenia, usuario, ID_ROL, ID_USUARIO, estatus FROM usuarios WHERE correo = Pcorreo AND ID_USUARIO <> PID_USUARIO;
     end if;
+# Identificar Correo no le pertenece a este usuario
+    if pAccion = 9 then
+		SELECT contrasenia, usuario, ID_ROL, ID_USUARIO, estatus FROM usuarios WHERE correo = Pcorreo AND usuario <> Pusuario;
+    end if;
 #Verificar privacidad Creo que esta podria ir a function
     if pAccion = 3 then
 		SELECT privacidad FROM usuarios WHERE correo = Pcorreo;
@@ -158,11 +162,11 @@ BEGIN
 			VALUES (pID_PRODUCTO, Pcategorias);
     end if;
       if pAccion = 5 then
-		SELECT ID_PRODUCTO, nombre, descripcion,tipoVenta, valoracion, precio, cantidad, ID_VENDEDOR, icono, vendedor, categorias, video, imagenes FROM viewJuguetesnoAUTORIZ;
+		# borrar sum y usar view no autorizado
+		SELECT ID_PRODUCTO, nombre, descripcion, tipoVenta, valoracion, precio, cantidad, ID_VENDEDOR, icono, vendedor, categorias, video, imagenes
+		FROM viewJuguetesnoAUTORIZ;
     end if;
 	if pAccion = 6 then
-
-
 		SELECT ID_PRODUCTO, nombre, tipoVenta, precio, ID_VENDEDOR, icono, vendedor, ventas FROM viewJuguetesPorVenta order by ventas desc;
     end if;
 END =)

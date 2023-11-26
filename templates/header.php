@@ -29,7 +29,7 @@ session_start();
 
 <header>
         <nav>
-            <div class="container-fluid" style=" background-color: pink;">
+            <div class="container-fluid py-3" style=" background-color: pink;">
                 <div class="row">
                     <div class="col-2 py-1" id = "logo">
                         <img class="logo" src="images/logo.png" width="40px" height="40px">
@@ -37,8 +37,8 @@ session_start();
 
                     </div>
                     <div class="col-5 py-1 text-center" >
-                        <form action="" method="GET" id="FormSearch">
-                            <input type="search" id = "busqueda" style="width: 400px;" placeholder="Buscar juguetes">
+                        <form class="d-flex" action="" method="GET" id="FormSearch">
+                            <input type="search" id = "busqueda" class="w-100" placeholder="Buscar juguetes">
                             <input type="submit" value="buscar"  id = "buscar" class="btn btn-primary btn-info text-end">
                         </form>
                     </div>

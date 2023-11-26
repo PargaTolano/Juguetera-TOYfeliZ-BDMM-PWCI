@@ -31,7 +31,7 @@ include('./templates/header.php');
 
     <div class="container px-4"  >
         <div class="row">
-            <div class="col-2 categorías py-2 px-4 bg-light">
+            <div class="col-12 col-lg-4 categorías py-2 px-4 bg-light">
 
                 <h6 class="Titulos text-center"> CATEGORÍAS </h6>
                 <div>
@@ -70,7 +70,7 @@ include('./templates/header.php');
 
 
             </div>
-            <div class="col-10 bg-light">
+            <div class="col-12 col-lg-8 bg-light">
                 <div class="container">
                     <h2 class="Titulos text-center"> JUGUETES </h2>
                 </div>
@@ -89,7 +89,7 @@ include('./templates/header.php');
 
     <div class="container px-4">
         <div class="row">
-            <div class="col-12 separadorDoble" style="background-color: pink;">
+            <div class="col-12 px-4 py-4" style="background-color: pink;">
                 <h4 class="Titulos"> Productos recomendados </h4>
                 
                 <div class="bg-light text-center" style="display: flex; overflow-x: scroll;">

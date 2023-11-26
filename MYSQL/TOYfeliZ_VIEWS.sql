@@ -80,7 +80,7 @@ SELECT ID_PRODUCTO, nombre, tipoVenta, precio, ID_VENDEDOR, icono, vendedor FROM
 
 CREATE VIEW viewJuguetesPorVenta AS
 	SELECT a.ID_PRODUCTO, a.nombre, a.tipoVenta, a.precio, a.ID_VENDEDOR, a.icono, c.usuario as vendedor, sum(cantidadCompradaVendida) ventas
-		FROM juguetes a INNER JOIN usuarios c ON a.ID_VENDEDOR = c.ID_USUARIO INNER JOIN pedidosyventas k ON k.ID_JUGUETE = a.ID_PRODUCTO
+		FROM juguetes a INNER JOIN usuarios c ON a.ID_VENDEDOR = c.ID_USUARIO LEFT JOIN pedidosyventas k ON k.ID_JUGUETE = a.ID_PRODUCTO
 			WHERE autorizado = 1 
 				GROUP BY a.ID_PRODUCTO;
 

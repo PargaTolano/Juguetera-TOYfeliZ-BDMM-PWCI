@@ -8,13 +8,70 @@ $.ajax({
     success: function(result){
         var data = JSON.parse(result);
         for (let i = 0; i < data['jug'].length;i++){
-            
-
             if (data['jug'][i].tipoVenta == "Cotizar"){
-                $("#container_juguetes").append('<div class="container-fluid separadorDoble" > <div class="row"> <div class="col-3 text-center" > <img src="' + data['jug'][i].icono +'" class="img-thumbnail" width="150px " height =150px alt=""> </div> <div class="col-9 bg-info separador" > <h4 id="Nombre producto"> ' +  data['jug'][i].nombre +'</h4> <label> Total de ventas: '+ data['jug'][i].ventas +'  </label> <br> <label> Disponible para cotizar '+ data['jug'][i].tipoVenta +' </label> <br> <label > Venta de: </label> <label > ' +  data['jug'][i].vendedor + '</label> <div align = "right"> <button type="button" id="Ver' + data['jug'][i].ID_PRODUCTO +'" value="'+  data['jug'][i].ID_PRODUCTO + '" class="btn btn-primmary bg-warning VER" style="right: 10px;"> Ver </button></div> </div> </div> </div> <hr>');
+                $("#container_juguetes").append(`
+                  <div class="container-fluid separadorDoble">
+                    <div class="row"> <div class="col-3 text-center"> 
+                      <img 
+                        src="${data['jug'][i].icono}" 
+                        class="img-thumbnail" 
+                        width="150px" 
+                        height="150px" 
+                        alt=""
+                      > 
+                    </div>
+                    <div class="col-9 bg-info separador" >
+                      <h4 id="Nombre producto">${data['jug'][i].nombre}</h4>
+                      <label> Total de ventas: ${data['jug'][i].ventas || 0}</label><br>
+                      <label> Disponible para cotizar ${data['jug'][i].tipoVenta}</label><br>
+                      <label> Venta de: </label><label>${data['jug'][i].vendedor}</label>
+                      <div align = "right"> 
+                        <button 
+                          type="button" 
+                          id="Ver${data['jug'][i].ID_PRODUCTO}" 
+                          value="${data['jug'][i].ID_PRODUCTO}" 
+                          class="btn btn-primmary bg-warning VER" 
+                          style="right: 10px;"
+                        > 
+                          Ver 
+                        </button>
+                      </div> 
+                    </div> 
+                  </div> 
+                </div><hr>`);
             }
             else{
-                $("#container_juguetes").append('<div class="container-fluid separadorDoble" > <div class="row"> <div class="col-3 text-center" > <img src="' + data['jug'][i].icono +'" class="img-thumbnail" width="150px " height =150px alt=""> </div> <div class="col-9 bg-info separador" > <h4 id="Nombre producto"> ' +  data['jug'][i].nombre +'</h4> <label> Total de ventas: '+ data['jug'][i].ventas +' </label><br>  <label> MXN ' + data['jug'][i].precio +' </label> <br> <label > Venta de: </label> <label > ' +  data['jug'][i].vendedor + '</label> <div align = "right"> <button type="button" id="Ver' + data['jug'][i].ID_PRODUCTO +'" value="'+  data['jug'][i].ID_PRODUCTO + '" class="btn btn-primmary bg-warning VER" style="right: 10px;"> Ver </button></div> </div> </div> </div> <hr>');
+                $("#container_juguetes").append(`
+                <div class="container-fluid separadorDoble">
+                  <div class="row">
+                    <div class="col-3 text-center">
+                      <img 
+                        src="${data['jug'][i].icono}" 
+                        class="img-thumbnail" width="150px" 
+                        height="150px"
+                        alt=""
+                      >
+                    </div> 
+                    <div class="col-9 bg-info separador">
+                      <h4 id="Nombre producto">${data['jug'][i].nombre}</h4>
+                      <label>Total de ventas: ${data['jug'][i].ventas || 0}</label><br>
+                      <label>MXN ${data['jug'][i].precio}</label><br>
+                      <label > Venta de: </label>
+                      <label >${data['jug'][i].vendedor}</label>
+                      <div align = "right"> 
+                        <button 
+                          type="button" 
+                          id="Ver${data['jug'][i].ID_PRODUCTO}" 
+                          value="${data['jug'][i].ID_PRODUCTO}" 
+                          class="btn btn-primmary bg-warning VER" 
+                          style="right: 10px;"
+                        > 
+                          Ver 
+                        </button>
+                      </div>
+                    </div>
+                  </div> 
+                </div><hr>`);
             }
         }
     },
@@ -150,7 +207,7 @@ function getCategorias(){
         success: function(result){
             var data = JSON.parse(result);
             for(let i = 0; i < data.length; i++){
-                $("#categs").append('<li> <a href="" >' + data[i].nombre + '</a>  </li>');       
+                $("#categs").append(`<li> <a href="?cat=${data[i].ID_CATEGORIA}" >${data[i].nombre}</a>  </li>`);       
                 $("#categorias_selec").append('<label><input type="checkbox" name="categoria_Selec[]" value='+  data[i].ID_CATEGORIA +'><span> '+ data[i].nombre +'</span></label>');        
             }
         },

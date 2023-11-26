@@ -39,11 +39,22 @@ class JuguetesControlador extends Toys {
     }
 
     public function PublicarJuguete(){
-        if ($this->inputVacio() == false ){
-            echo "Llena todos los campos.";
+        if ($this->inputVacio()){
+            echo "Llena todos los campos.
+              descripcion: {$this->descripcion},
+              tipoVenta: {$this->tipoVenta},
+              nombre: {$this->nombre},
+              valoracion: {$this->valoracion},
+              categorias: {$this->categorias},
+              cantidad: {$this->cantidad},
+              precio: {$this->precio},
+              ID_VENDEDOR: {$this->ID_VENDEDOR},
+              icono: {$this->icono},
+              videos: {$this->videos},
+              imagenes: {$this->imagenes}
+            ";
             //header ("location: ../index.php?error=inputVacio");
             exit();
-            
         }
         $this->insertarJuguete($this->nombre, $this->descripcion, $this->tipoVenta, $this->valoracion, $this->precio,  $this->cantidad, $this->ID_VENDEDOR, $this->icono, $this->categorias, $this->videos, $this->imagenes);
         echo "Producto enviado a revision."; 
@@ -67,13 +78,18 @@ class JuguetesControlador extends Toys {
     }
 
     private function inputVacio(){
-        $check;
-        if (empty($this->descripcion) || empty ($this->tipoVenta) || empty ($this->nombre) ||empty ($this->valoracion) || empty ($this->categorias)  || empty ($this->cantidad)  ||  empty ($this->precio)|| empty ($this->ID_VENDEDOR) || empty ($this->icono)|| empty ($this->videos)|| empty ($this->imagenes)){
-            $check = false;
-        }else {
-            $check = true;
-        }
-        return $check;
+        return 
+        empty ($this->descripcion) || 
+        empty ($this->tipoVenta) || 
+        empty ($this->nombre) ||
+        empty ($this->valoracion) || 
+        empty ($this->categorias)  || 
+        empty ($this->cantidad)  ||  
+        empty ($this->precio)|| 
+        empty ($this->ID_VENDEDOR) || 
+        empty ($this->icono)|| 
+        empty ($this->videos)|| 
+        empty ($this->imagenes);
     }
 }
 
@@ -92,7 +108,7 @@ class ComentariosControlador extends Toys {
     }
 
     public function Comentar(){
-        if ($this->inputVacio() == false ){
+        if ($this->inputVacio()){
             echo 3;
             //header ("location: ../index.php?error=inputVacio");
             exit();
@@ -101,13 +117,10 @@ class ComentariosControlador extends Toys {
     }
 
     private function inputVacio(){
-        $check;
-        if (empty($this->calificacion) || empty ($this->comentario)  ||  empty ($this->ID_PRODUCTO)|| empty ($this->ID_USUARIO) ){
-            $check = false;
-        }else {
-            $check = true;
-        }
-        return $check;
+        return empty($this->calificacion) ||
+          empty ($this->comentario)  || 
+          empty ($this->ID_PRODUCTO)||
+          empty ($this->ID_USUARIO);
     }
 
 }

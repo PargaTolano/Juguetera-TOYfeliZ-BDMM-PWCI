@@ -172,7 +172,7 @@ class Toys extends Dbh {
 
         if (!$stmt->execute(array(6, null, null, null, null, null, null, null, null, null, null, null, null, null, null))){
             $stmt = null;
-            echo "error en la insercion.";
+            echo "error cargando juguetes.";
             //header ("location: ../index.php?error=stmtfailed");
             exit();
         }

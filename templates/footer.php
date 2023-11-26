@@ -1,13 +1,11 @@
-<div class="container" >
-        <FOOTer class="bg-info">
-            <div class="text-center py-3">
-                <fieldset>
-                    <p> Universidad Autonoma de Nuevo Leon</p>
-                    <p> Facultad de Ciencias Físico Matemáticas</p>
-                    <p> © Blanca Elizabeth Delgadillo Trujillo 1986178</p>
-                </fieldset>
+    <div class="container" >
+        <footer class="bg-info">
+            <div class="text-center text-light py-3">
+                <p> Universidad Autonoma de Nuevo Leon</p>
+                <p> Facultad de Ciencias Físico Matemáticas</p>
+                <p> © Blanca Elizabeth Delgadillo Trujillo 1986178</p>
             </div>
-        </FOOTer>
+        </footer>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

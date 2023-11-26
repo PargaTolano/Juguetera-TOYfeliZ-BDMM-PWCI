@@ -4,9 +4,9 @@ include ('../classes/clase_controlador_categorias.php');
 $action = $_GET['action'];
 
 if ($action == 'setCategories') 
-    setCategories();
+  setCategories();
 else if ($action == 'getCategories')
-getCategories();
+  getCategories();
 
 
 function setCategories() {
@@ -25,7 +25,6 @@ function setCategories() {
 }
 
 function getCategories() {
-    
     $categoria = new CategoriesControlador("", "", ""); 
     $categoria->Mostrar();
     //header ("location: ../inicio.php?error=none");

@@ -4,38 +4,40 @@ include ('../classes/clase_controlador_juguetes.php');
 if (isset($_POST['action'])){
     $action = $_POST['action'];
     if ($action == 'getJuguete') 
-        getJuguete();
+      getJuguete();
     else if ($action == 'getJuguetes')
-        getJuguetes();
+      getJuguetes();
     else if ($action == 'getSinAutorizar')
-    getSinAutorizar();
+      getSinAutorizar();
     else if ($action == 'Autorizar')
-    Autorizar();
+      Autorizar();
     else if ($action == 'setComent')
-    setComent();
+      setComent();
 }
 else {
 
     $videos = $_FILES['videos']['name'];
+    $realvideo = [];
 
-
-    $i =0;
-    foreach($videos as $selected):
-        $fileName = basename($selected);
-        $videoType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-        $allowedTypes = array("mp4", "wav");
-
-        if (in_array($videoType, $allowedTypes)){
-            $videoName = $_FILES["videos"]["tmp_name"][$i]; //accede a la carpeta temporal de imgs del servidor (XAMP)
-            $video64 = base64_encode(file_get_contents($videoName)); //codifica los bits en base 64
-            $realvideo[] = 'data:image/'. $videoType. ';base64, '.$video64;
-
-        }else{
-            echo "formato no valido.";
-            exit();  
-        }
-        $i=$i+1;
-    endforeach;
+    if (count($videos) == 1 && !empty($videos[0]) ) {
+      $i =0;
+      foreach($videos as $selected):
+          $fileName = basename($selected);
+          $videoType = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+          $allowedTypes = array("mp4", "wav");
+  
+          if (in_array($videoType, $allowedTypes)){
+              $videoName = $_FILES["videos"]["tmp_name"][$i]; //accede a la carpeta temporal de imgs del servidor (XAMP)
+              $video64 = base64_encode(file_get_contents($videoName)); //codifica los bits en base 64
+              $realvideo[] = 'data:image/'. $videoType. ';base64, '.$video64;
+  
+          }else{
+              echo "formato no valido. videos";
+              exit();  
+          }
+          $i=$i+1;
+      endforeach;
+    }
 
 
     $imagenes = $_FILES['imagenes']['name'];
@@ -51,7 +53,7 @@ else {
             $_realImage[] = 'data:image/'. $imageType. ';base64, '.$image64;
 
         }else{
-            echo "formato no valido.";
+            echo "formato no valido. imagenes";
             exit();  
         }
         $i=$i+1;
@@ -73,7 +75,7 @@ else {
             $_realImage2_icon = 'data:image/'. $imageType. ';base64, '.$image64;
 
         }else{
-            echo "formato no valido.";
+            echo "formato no valido. perfil_producto";
             exit();  
         }
     }else{
@@ -90,8 +92,20 @@ else {
     $cantidad = $_POST['cantidad'];
     $icono = $_realImage2_icon;
     $valoracion = 1;
-    $registro = new JuguetesControlador($nombre, $descripcion, $tipoVenta, $valoracion , $precio, $cantidad, $ID_VENDEDOR,
-     $icono, $categorias, "", $realvideo, $_realImage);
+    $registro = new JuguetesControlador(
+      $nombre, 
+      $descripcion, 
+      $tipoVenta, 
+      $valoracion , 
+      $precio, 
+      $cantidad, 
+      $ID_VENDEDOR,
+      $icono, 
+      $categorias, 
+      "", 
+      $realvideo, 
+      $_realImage
+    );
     $registro->PublicarJuguete();
 
     //header ("location: ../index.php?error=none");
