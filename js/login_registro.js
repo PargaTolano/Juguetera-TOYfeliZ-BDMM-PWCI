@@ -22,7 +22,6 @@ $(document).ready(function(){
         
     });
     $("#form_registro").submit(function(event){
-      event.prevenDefault();
       if (campoVacio() && validarEmail() && validarContraseña() && validarFecha()) {
         $.ajax({
             data: new FormData(this),
@@ -47,7 +46,7 @@ $(document).ready(function(){
                 }
                 else if (result == "4"){
                     alert("exito, te registraste en TZ")
-                    window.location.href = "index.php";
+                    // window.location.href = "index.php";
                 }                                
             }, error: function(data){
                 alert(JSON.stringify(data));
@@ -56,28 +55,29 @@ $(document).ready(function(){
             }
         })
       }
+      return false;
     });      
 });
 
 
 function campoVacio (){
-    if($("#Nombres").val().length < 1) {
+    if(!$("#Nombres").val().trim()) {
         alert("Campo de nombres vacío.");
         return false;
     }
-    if($("#Apellidos").val().length < 1 ) {
+    if(!$("#Apellidos").val().trim()) {
         alert("Campo de apellidos vacío.");
         return false;
     }
-    if($("#Correo").val().length < 1) {
+    if(!$("#Correo").val().trim()) {
         alert("Campo de correo vacío.");
         return false;
     }
-    if($("#Usuario").val().length < 3) {
+    if($("#Usuario").val().trim().length < 3) {
         alert("El usuario debe tener al menos 3 caracteres.");
         return false;
     }
-    if($("#Contraseña").val().length < 1) {
+    if(!$("#Contraseña").val().trim()) {
         alert("Campo de contraseña vacío.");
         return false;
     }

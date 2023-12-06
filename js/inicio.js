@@ -89,10 +89,14 @@ $(document).ready(function(){
         url: './controlador/listas.php',
         async: false,
         success: function(result){
-            var data = JSON.parse(result);
+          try {
+            const data = JSON.parse(result);
             for (let i = 0; i < data.length;i++){
                 $("#list_container").append('<li> <a href="ver_lista.php?lista=' + data[i].ID_LISTA  +'"><span><b> ' +data[i].nombre +'  </b> </span></a> </li>');
             }
+          } catch (err) {
+            alert(result);
+          }
         },
         error: function(result){
             console.log("La solicitud regreso con un error: " + result);
@@ -105,9 +109,13 @@ $(document).ready(function(){
         url: './controlador/listas.php',
         async: false,
         success: function(result){
-            var data = JSON.parse(result);
-            for (let i = 0; i < data.length;i++){              
-                $("#listasdisp").append('<option value="'+ data[i].ID_LISTA +'"> '+ data[i].nombre+' </option>');
+            try {
+              const data = JSON.parse(result);
+              for (let i = 0; i < data.length;i++){              
+                  $("#listasdisp").append('<option value="'+ data[i].ID_LISTA +'"> '+ data[i].nombre+' </option>');
+              }
+            } catch (err) {
+              alert(result);
             }
         },
         error: function(result){

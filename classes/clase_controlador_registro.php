@@ -64,23 +64,11 @@ class RegistroControlador extends Register {
     }
     
     private function correoUnico (){
-        $check;
-        if (!$this->RevisarCorreo($this->correo)){
-            $check = false;
-        }else {
-            $check = true;
-        }
-        return $check;
+      return $this->RevisarCorreo($this->correo);
     }
 
     private function usuarioUnico (){
-        $check;
-        if (!$this->RevisarUsuario($this->usuario)){
-            $check = false;
-        }else {
-            $check = true;
-        }
-        return $check;
+      return $this->RevisarUsuario($this->usuario);
     }
 }
 

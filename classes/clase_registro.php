@@ -24,19 +24,15 @@ class Register extends Dbh {
         $stmt = $this-> connect()-> prepare('CALL sp_GetCorreoContra (?, ?, ?, ?);');
         if (!$stmt->execute(array(3, null, $correo, null))){ //false si no se pudo ejecutar
             $stmt = null;
-            echo "El correo ya existe";
+            $arr = $stmt->errorInfo();
+            print_r($arr);
 
             exit();
         }
-        $check;
-        //cuantas filas con el correo trajo el stmt
-        if ($stmt->rowCount() > 0){
-            $check = false;
-        }
-        else{
-            $check = true;
-        }
-        return $check;
+
+        $arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return count($arr) === 0;
     }
 
     protected function RevisarUsuario($usuario){
@@ -47,15 +43,10 @@ class Register extends Dbh {
 
             exit();
         }
-        $check;
-        //cuantas filas con el correo trajo el stmt
-        if ($stmt->rowCount() > 0){
-            $check = false;
-        }
-        else{
-            $check = true;
-        }
-        return $check;
+
+        $arr = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return count($arr) == 0;
     }
 }
 

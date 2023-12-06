@@ -34,12 +34,12 @@ class PerfilControlador extends PerfilActions {
             exit();
             
         }
-        if (!$this->correoUnico() ){
+        if ($this->correoUnico() ){
             echo "El correo ya existe.";
             //header ("location: ../index.php?error=correoUnico");
             exit();
         }
-        if (!$this->usuarioUnico() ){
+        if ($this->usuarioUnico() ){
             echo "Nombre de usuario en uso.";
             //header ("location: ../index.php?error=correoUnico");
             exit();

@@ -24,6 +24,7 @@ class Carrito extends Dbh {
         }
 
         $juguetes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $lista_jug = [];
 
         foreach ($juguetes as $row): 
             $ID_CARRITO = $row['ID_CARRITO'];

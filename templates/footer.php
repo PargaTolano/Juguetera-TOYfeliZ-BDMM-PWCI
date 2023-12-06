@@ -1,4 +1,4 @@
-    <div class="container" >
+    <div class="container p-0" >
         <footer class="bg-info">
             <div class="text-center text-light py-3">
                 <p> Universidad Autonoma de Nuevo Leon</p>

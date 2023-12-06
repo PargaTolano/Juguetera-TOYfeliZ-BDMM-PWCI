@@ -46,6 +46,7 @@ class Listas extends Dbh {
         }
 
         $listas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $lista_listas = [];
 
         foreach ($listas as $row): 
             $nombre = $row['nombre'];
@@ -66,6 +67,7 @@ class Listas extends Dbh {
         }
 
         $listas = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $lista_listas = [];
 
         foreach ($listas as $row): 
             $nombre = $row['nombre'];

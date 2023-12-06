@@ -1,19 +1,19 @@
 #-----------------------------QUERYS----------------------------------
 
-SELECT ID_LISTA, nombre from listas WHERE ID_CLIENTE = 2;
-SELECT * from listas;
-SELECT * from deseos;
-SELECT* from usuarios;
-SELECT * from poductoscarrito;
-SELECT * from carrito;
-SELECT * from rol;
-SELECT * from categorias;
-SELECT * from categoriajuguete;
-SELECT * from comentarios ;
-SELECT * from juguetes;
-SELECT * from imagenes;
+SELECT ID_LISTA, nombre FROM listas WHERE ID_CLIENTE = 2;
+SELECT * FROM listas;
+SELECT * FROM deseos;
+SELECT * FROM usuarios;
+SELECT * FROM poductoscarrito;
+SELECT * FROM carrito;
+SELECT * FROM rol;
+SELECT * FROM categorias;
+SELECT * FROM categoriajuguete;
+SELECT * FROM comentarios ;
+SELECT * FROM juguetes;
+SELECT * FROM imagenes;
 SELECT * FROM videos;
-SELECT * from pedidosyventas;
+SELECT * FROM pedidosyventas;
 
 		UPDATE poductoscarrito set estatus = 0 where ID_CLIENTE = 5;
 insert into pedidosyventas (precioFinalProducto, cantidadCompradaVendida, ID_JUGUETE, ID_CLIENTE, ID_VENDEDOR ) values (150, 1, 7, 2, 1);

@@ -61,10 +61,10 @@ session_start();
                             ?>
 
                         <div class="dropdown">
-                            <img class="icon" style="object-fit: cover;" id = "icon" src="images/LOGO.png"  width="40px" height="40px">
+                            <img class="icon rounded-circle" style="object-fit: cover;" id = "icon" src="images/LOGO.png"  width="40px" height="40px">
                             <label id = "nombre_usuario"></label>
                             <div class="dropdown-content">
-                                <a href="perfil_usuario.php?user=<?php echo $_SESSION['username_usuario'] ?>" style= "text-decoration: none;"> Ver perfil </a>
+                                <a href="perfil_usuario.php?user=<?php echo $_SESSION['username_usuario'] ?>"> Ver perfil </a>
                             </div>
                         </div>
                     </div>
