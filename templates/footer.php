@@ -14,6 +14,7 @@
     <script src="./js/inicio.js"></script>
     <script src="./js/perfil.js"></script>
     <script src="./js/carrito.js"></script>
+    <script src="./js/lists.js"></script>
 
 </body>
 </html>

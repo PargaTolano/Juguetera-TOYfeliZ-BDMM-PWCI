@@ -35,7 +35,6 @@ class ListasControlador extends Listas {
     public function InsertarLista(){
         if ($this->inputVacio() == false) {
             echo "Campos vacios";
-            header ("location: ../indice.php?error=inputVacioLlenatodowe");
             exit();
         }
         $this->CrearLista($this->nombre, $this->descripcion, $this->ID_CLIENTE, $this->privacidad, $this->imagenes);

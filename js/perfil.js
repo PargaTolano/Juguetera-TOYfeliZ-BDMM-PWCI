@@ -53,7 +53,9 @@ function infoperfil(){
         url: './controlador/perfil.php',
         async: false,
         success: function(result){
-            var data = JSON.parse(result);
+            const data = JSON.parse(result);
+            if (!data.length) return;
+
             if (data[0].usuario != $("#nombre_usuario").html()){
                 $("#USER").html(data[0].usuario);
                 $("#PRIVACIDAD").html(data[0].privacidad);
@@ -86,7 +88,7 @@ function infoperfil(){
                     
         },
         error: function(result){
-            console.log("La solicitud regreso con un error: " + result);
+            console.log("La solicitud regreso con un error: " + result.responseText);
         }  
     });
 }

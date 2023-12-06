@@ -22,7 +22,7 @@ include('./templates/header.php');
 
     <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="" method="POST" id="form_listas" enctype = "multipart/form-data">
+            <form method="POST" id="form_listas" enctype = "multipart/form-data">
             <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title Titulos" id="exampleModalLabel">Crear lista </h5>

@@ -147,7 +147,6 @@ $(document).ready(function(){
     });
    
     $("#form_listas").submit(function(event){
-        event.preventDefault();
         $.ajax({
             type: "POST",
             url: './controlador/listas.php',
@@ -158,10 +157,13 @@ $(document).ready(function(){
                 alert(result);
                 $("#nombreLista").val("");
                 $("#descLista").val("");
+                window.location.reload();
             }, error: function(result){
+              alert(result.responseText);
                 alert("Error en el php" + result);
             }
         })
+        return false;
     });
 
     $("#FormSearch").submit(function(event){
