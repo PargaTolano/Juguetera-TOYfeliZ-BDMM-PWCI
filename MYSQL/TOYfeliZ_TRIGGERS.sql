@@ -1,3 +1,4 @@
+DROP TRIGGER IF EXISTS tg_añadiraHistorial;
 DELIMITER =)
 CREATE TRIGGER tg_añadiraHistorial AFTER UPDATE ON poductoscarrito for each row
 begin
@@ -16,6 +17,7 @@ begin
 end=)
 DELIMITER ;
  
+DROP TRIGGER IF EXISTS tg_bajarcantidad;
 DELIMITER $$
 CREATE TRIGGER tg_bajarcantidad AFTER INSERT ON pedidosyventas for each row
 begin 

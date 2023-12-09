@@ -1,72 +1,93 @@
-
 const valores = window.location.search;
 
 const urlParams = new URLSearchParams(valores);
-var ID_PRODUCTO = urlParams.get("ID_PRODUCTO");
+const ID_PRODUCTO = urlParams.get("ID_PRODUCTO");
 
 cargarinfo();
 function cargarinfo(){
 
     $.ajax({
-        data: {action: 'getJuguete', ID_PRODUCTO: ID_PRODUCTO},
+        data: {action: 'getJuguete', ID_PRODUCTO},
         type: "POST",
         url: './controlador/juguetes.php',
         async: false,
         success: function(result){
-            var data = JSON.parse(result);
+          try {
+            const data = JSON.parse(result);
+            const [jug] = data['jug'];
 
-            $("#valoraciones").html(data['jug'][0].valoracion);
-            $("#nombre_vendedor").html(data['jug'][0].vendedor);
-            $("#nombre_product_grande").html(data['jug'][0].nombre);
-            $("#nombre_product").html(data['jug'][0].nombre);
-            $("#desc_product").html(data['jug'][0].descripcion);
-            $("#cantidad_product").html(data['jug'][0].cantidad);
-            $("#precio_product").html(data['jug'][0].precio);
-            if (data['jug'][0].tipoVenta == "Cotizar"){
-                $("#Productocotizar").html(data['jug'][0].tipoVenta);
-                if (data['jug'][0].cantidad > 0){
-                    $("#botones").append('    <button type="button" id="aCarrito" class="btn btn-primary btn-info" data-bs-toggle="modal" data-bs-target="#cotModal"> Agregar al carrito </button> ' );
-                    $("#acomprar").attr("max", data['jug'][0].cantidad );
+            $("#valoraciones").html(jug.valoracion);
+            $("#nombre_vendedor").html(jug.vendedor);
+            $("#nombre_product_grande").html(jug.nombre);
+            $("#nombre_product").html(jug.nombre);
+            $("#desc_product").html(jug.descripcion);
+            $("#cantidad_product").html(jug.cantidad);
+            $("#precio_product").html(jug.precio);
+            if (jug.tipoVenta == "Cotizar"){
+                $("#Productocotizar").html(jug.tipoVenta);
+                if (jug.cantidad > 0){
+                    $("#botones").append('<button type="button" id="aCarrito" class="btn btn-primary btn-info" data-bs-toggle="modal" data-bs-target="#cotModal"> Agregar al carrito </button> ' );
+                    $("#acomprar").attr("max", jug.cantidad );
                 }
-                
-
             }
             else{
                 $("#Productocotizar").html("Venta");
                 
-                if (data['jug'][0].cantidad > 0){
-                    $("#botones").append('    <button type="button" id="aCarrito" class="btn btn-primary btn-info" data-bs-toggle="modal" data-bs-target="#añadirCarrModal"> Agregar al carrito </button> ' );
-                    $("#acomprar").attr("max", data['jug'][0].cantidad );
+                if (jug.cantidad > 0){
+                    $("#botones").append(`
+                      <button 
+                        type="button" 
+                        id="aCarrito" 
+                        class="btn btn-primary btn-info" 
+                        data-bs-toggle="modal" 
+                        data-bs-target="#añadirCarrModal"
+                      > 
+                        Agregar al carrito 
+                      </button>
+                    `);
+                    $("#acomprar").attr("max", jug.cantidad );
                 }
 
             }
-            $("#icono_product").attr("src",data['jug'][0].icono);
-            for (let i = 0; i < data['jug'].length;i++){
-                $("#categorias_del_juguete").append('<label> <a href=""> '+ data['jug'][i].categorias +'</a> </label> ' );
+            $("#icono_product").attr("src",jug.icono);
+
+            for (const juguete of data['jug']) {
+                $("#categorias_del_juguete").append(`<label><a href="">${juguete.categorias}</a></label>`);
             }
-            
-            for (let i = 0; i < data['imgs'].length; i++){
-                $("#imgs_extra").append('<img src=" '+ data['imgs'][i].imagen + '" alt="" width=170px height = 170px id="icono_product'+i+'">' );
+            for (const img of data['imgs']) {
+              $("#imgs_extra").append(`
+                <img 
+                  style="object-fit: cover;" 
+                  src="${img.imagen}" 
+                  alt="" 
+                  width="170px" height="170px"
+                >`);
             }
-            for (let i = 0; i < data['vids'].length;i++){
-                $("#videos").append('<video width="400" controls="controls" preload = "metadata" > <source src="'+data['vids'][i].video  +'"> </video>  ' );
+            for (const vid of data['vids']){
+                $("#videos").append(`
+                  <video
+                    style="width: 100%";
+                    controls="controls"
+                    src="${vid.video}"
+                  >
+                  </video>`
+                );
             }            
-            for (let i = 0; i < data['coment'].length;i++){
-                if(data['coment'][i].calificación == 5){
-                    $('#comentarios').append('<label> Calificacion: </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <br> ')
-                }
-                else if(data['coment'][i].calificación == 4){
-                    $('#comentarios').append('<label> Calificacion: </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <br> ')
-                }else if(data['coment'][i].calificación == 3){
-                    $('#comentarios').append('<label> Calificacion: </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <br> ')
-                }else if(data['coment'][i].calificación == 2){
-                    $('#comentarios').append('<label> Calificacion: </label>  <label> ★ </label> <label> ★ </label> <br> ')
-                } else if(data['coment'][i].calificación == 1){
-                    $('#comentarios').append('<label> Calificacion: </label> <label> ★ </label> <br> ')
-                } 
-                $("#comentarios").append('<img src="' + data['coment'][i].foto +'" alt="" width=40px> <label >'+ data['coment'][i].usuario  + '</label><br> <label> Enviado el </label> <label>'+ data['coment'][i].fechaCreacion +'  </label><br>  <p> '+  data['coment'][i].descripcionc +'</p> <br>' );
+            for (const comment of data['coment']) {
+              $('#comentarios')
+                .append(`<label> Calificacion: </label>${
+                  '<label> ★ </label'.repeat(parseInt(comment.calificación))
+                }`)
+                .append(`
+                  <img src="${comment.foto}" width="40px"> 
+                  <label>${comment.usuario}</label><br>
+                  <label> Enviado el </label> <label>${comment.fechaCreacion}</label><br>
+                  <p>${comment.descripcionc}</p><br>` 
+                ); 
             }
-    
+          } catch {
+            console.log(result);
+          }
         },
         error: function(result){
             console.log("La solicitud regreso con un error: " + result);
@@ -79,31 +100,31 @@ function cargarinfo(){
 function recargarcomentarios(){
 
     $.ajax({
-        data: {action: 'getJuguete', ID_PRODUCTO: ID_PRODUCTO},
+        data: {action: 'getJuguete', ID_PRODUCTO},
         type: "POST",
         url: './controlador/juguetes.php',
         async: false,
-        success: function(result){  
-            var data = JSON.parse(result);
+        success: function(result){
+          try {
+            const data = JSON.parse(result);
 
             $("#valoraciones").html(data['jug'][0].valoracion);
-
-            for (let i = 0; i < data['coment'].length;i++){
-                if(data['coment'][i].calificación == 5){
-                    $('#comentarios').append('<label> Calificacion: </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <br> ')
-                }
-                else if(data['coment'][i].calificación == 4){
-                    $('#comentarios').append('<label> Calificacion: </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <br> ')
-                }else if(data['coment'][i].calificación == 3){
-                    $('#comentarios').append('<label> Calificacion: </label> <label> ★ </label> <label> ★ </label> <label> ★ </label> <br> ')
-                }else if(data['coment'][i].calificación == 2){
-                    $('#comentarios').append('<label> Calificacion: </label>  <label> ★ </label> <label> ★ </label> <br> ')
-                } else if(data['coment'][i].calificación == 1){
-                    $('#comentarios').append('<label> Calificacion: </label> <label> ★ </label> <br> ')
-                } 
-                $("#comentarios").append('<img src="' + data['coment'][i].foto +'" alt="" width=40px> <label >'+ data['coment'][i].usuario  + '</label><br> <label> Enviado el </label> <label>'+ data['coment'][i].fechaCreacion +'  </label><br>  <p> '+  data['coment'][i].descripcionc +'</p> <br>' );
+            
+            for (const comment of data['coment']) {
+              $('#comentarios')
+                .append(`<label> Calificacion: </label>${
+                  '<label> ★ </label'.repeat(parseInt(comment.calificación))
+                }`)
+                .append(`
+                  <img src="${comment.foto}" width="40px"> 
+                  <label>${comment.usuario}</label><br>
+                  <label> Enviado el </label> <label>${comment.fechaCreacion}</label><br>
+                  <p>${comment.descripcionc}</p><br>` 
+                ); 
             }
-    
+          } catch {
+            console.log(result);
+          }
         },
         error: function(result){
             console.log("La solicitud regreso con un error: " + result);
@@ -118,7 +139,7 @@ $(document).ready(function(){
             $.ajax({
                 type: "POST",
                 url: './controlador/listas.php',
-                data: {action: 'setTOlist', ID_PRODUCTO: ID_PRODUCTO, ID_LISTA:  $("#listasdisp").val()}, 
+                data: {action: 'setTOlist', ID_PRODUCTO, ID_LISTA:  $("#listasdisp").val()}, 
                 success: function(result) {
                     alert(result);
                 }, error: function(result){
@@ -144,7 +165,7 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: './controlador/carrito.php',
-            data: {ID_PRODUCTO: ID_PRODUCTO, cantidad:  $("#acomprar").val(), action: 'agregarproducto'}, 
+            data: {ID_PRODUCTO, cantidad:  $("#acomprar").val(), action: 'agregarproducto'}, 
             success: function(result) {
                 alert(result);
             }, error: function(result){
@@ -163,7 +184,7 @@ $(document).ready(function(){
         $.ajax({
             type: "POST",
             url: './controlador/juguetes.php',
-            data: {action: 'setComent', ID_PRODUCTO: ID_PRODUCTO, comentario: $("#comentario").val(), estrellas: $("input:radio[name=estrellas]:checked").val() }, 
+            data: {action: 'setComent', ID_PRODUCTO, comentario: $("#comentario").val().trim(), estrellas: $("input:radio[name=estrellas]:checked").val() }, 
             success: function(result) {
                 if (result == '1'){
                     alert('Ya calificaste este producto antes..');

@@ -31,9 +31,9 @@ session_start();
         <nav>
             <div class="container-fluid py-3" style=" background-color: pink;">
                 <div class="row">
-                    <div class="col-2 py-1" id = "logo">
+                    <div class="col-2 py-1" id="logo">
                         <img class="logo" src="images/logo.png" width="40px" height="40px">
-                        <img src="images/LOGO_large.png"  height="40px">
+                        <img class="d-none d-md-block" src="images/LOGO_large.png"  height="40px">
 
                     </div>
                     <div class="col-5 py-1 text-center" >

@@ -1,6 +1,7 @@
 
 #-----------------------------FUNCTIONS----------------------------------
 
+DROP FUNCTION IF EXISTS f_unidadesDisponibles;
 delimiter =)
 CREATE FUNCTION f_unidadesDisponibles ( fID_PRODUCTO smallint)
 	RETURNS INT
@@ -12,6 +13,7 @@ BEGIN
 END =)
 delimiter ;
 
+DROP FUNCTION IF EXISTS f_precioAPagar;
 delimiter (?
 CREATE FUNCTION f_precioAPagar ( fID_CLIENTE int)
 	RETURNS float
@@ -25,6 +27,7 @@ BEGIN
 END (?
 delimiter ;
 
+DROP FUNCTION IF EXISTS f_valoracion;
 delimiter (?
 CREATE FUNCTION f_valoracion ( fID_PRODUCTO float)
 	RETURNS float

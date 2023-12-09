@@ -1,9 +1,9 @@
-    <div class="container p-0" >
-        <footer class="bg-info">
+    <div class="container px-0" >
+        <footer class="row bg-info">
             <div class="text-center text-light py-3">
                 <p> Universidad Autonoma de Nuevo Leon</p>
                 <p> Facultad de Ciencias Físico Matemáticas</p>
-                <p> © Blanca Elizabeth Delgadillo Trujillo 1986178</p>
+                <p> © Issa Valeria Garza Sánchez 1800003</p>
             </div>
         </footer>
     </div>

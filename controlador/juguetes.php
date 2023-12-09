@@ -29,7 +29,7 @@ else {
           if (in_array($videoType, $allowedTypes)){
               $videoName = $_FILES["videos"]["tmp_name"][$i]; //accede a la carpeta temporal de imgs del servidor (XAMP)
               $video64 = base64_encode(file_get_contents($videoName)); //codifica los bits en base 64
-              $realvideo[] = 'data:image/'. $videoType. ';base64, '.$video64;
+              $realvideo[] = 'data:video/'. $videoType. ';base64, '.$video64;
   
           }else{
               echo "formato no valido. videos";
@@ -50,7 +50,7 @@ else {
         if (in_array($imageType, $allowedTypes)){
             $imageName = $_FILES["imagenes"]["tmp_name"][$i]; //accede a la carpeta temporal de imgs del servidor (XAMP)
             $image64 = base64_encode(file_get_contents($imageName)); //codifica los bits en base 64
-            $_realImage[] = 'data:image/'. $imageType. ';base64, '.$image64;
+            $_realImage[] = 'data:image/'. $imageType. ';base64,'.$image64;
 
         }else{
             echo "formato no valido. imagenes";
@@ -110,6 +110,7 @@ else {
 
     //header ("location: ../index.php?error=none");
 }
+
 function setComent(){
 
     session_start();

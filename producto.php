@@ -6,42 +6,36 @@ include('./templates/header.php');
 <br>
     <div class="container bg-light" style="padding: 30px">
       <div class="row">
-        <div class="col-6 text-center">
-          <img src="images/logo.png" alt="" width=370px height = 370px id="icono_product" >
-          
-          
-          <br><br>
-          
-          <span id="imgs_extra"></span> <br><br>
-
-          
+        <div class="col-12 col-md-6 mb-4">
+          <div class="w-100 juguete-img-container">
+            <img class="w-100 h-100 position-absolute top-0 start-0" style="object-fit: cover;" src="images/logo.png" id="icono_product" >
+          </div>
         </div>
-
-        <div class="col-6">
+        <div class="col-12 col-md-6 mb-4">
+            <h5 class="Titulos" id = "nombre_vendedor"> Undefined</h5>
+            <h1 class="Titulos" id="nombre_product_grande"> Producto </h1>
+            <label>Nombre producto: </label> <label id="nombre_product"> </label> <br>
             
-          <h5 class="Titulos" id = "nombre_vendedor"> Undefined</h5>
-          <h1 class="Titulos" id="nombre_product_grande"> Producto </h1>
-          <label>Nombre producto: </label> <label id="nombre_product"> </label> <br>
-          
-          <label > Categorías: </label>
-          <span id="categorias_del_juguete">
-          </span>
-          <br>
-          <label> Descripcion: </label> <label id="desc_product"> </label> <br> <br>
-          <label> Precio: MXN </label> <label id="precio_product"> </label> <br> <br>
-          <label id="Productocotizar" style="font-weight: bold;"></label> <br><br>
-          <label> Cantidad disponible: </label> <label id="cantidad_product"> </label><br> <br>
-          <label> Valoración promedio: </label>           
-
-          <label> ★ </label>
-          <label> ★ </label>
-          <label> ★ </label>
-          <label> ★ </label>
-          <label> ★ </label> <label id="valoraciones">  </label>
-          <br> <br>
-          <div id="videos"></div>
-          
-        </div> 
+            <label > Categorías: </label>
+            <span id="categorias_del_juguete">
+            </span>
+            <br>
+            <label> Descripcion: </label> <label id="desc_product"> </label> <br> <br>
+            <label> Precio: MXN </label> <label id="precio_product"> </label> <br> <br>
+            <label id="Productocotizar" style="font-weight: bold;"></label> <br><br>
+            <label> Cantidad disponible: </label> <label id="cantidad_product"> </label><br> <br>
+            <label> Valoración promedio: </label>           
+  
+            <label> ★ </label>
+            <label> ★ </label>
+            <label> ★ </label>
+            <label> ★ </label>
+            <label> ★ </label> <label id="valoraciones">  </label>
+            <br> <br>
+        </div>
+        <br><br>
+        <div class="mb-4" id="imgs_extra"></div> <br><br>
+        <div class="mb-4" id="videos"></div>
       </div>
     <div  class="text-center">
         <br>
@@ -68,7 +62,7 @@ include('./templates/header.php');
     <h1 class="Titulos"> Comentar </h1>
         <div><span>
             <form action="" method="POST" id="coment_form">
-                <img src="images/logo.png" id="foto_de_comentario" alt="" width=40px>
+                <img class="icon rounded-circle" style="object-fit: cover;"  src="images/logo.png" id="foto_de_comentario" alt="" width=40px height=40px>
                 <label id ="nombre_usuario_c"> </label> <br> 
                 <label for=""> Califica este producto:</label>
                 <label class="clasificacion clas"> 
@@ -203,16 +197,16 @@ include('./templates/header.php');
 
 </section>
 
-<div class="container" >
-        <FOOTer class="bg-info">
+<div class="container p-0" >
+        <footer class="bg-info">
             <div class="text-center py-3">
                 <fieldset>
                     <p> Universidad Autonoma de Nuevo Leon</p>
                     <p> Facultad de Ciencias Físico Matemáticas</p>
-                    <p> © Blanca Elizabeth Delgadillo Trujillo 1986178</p>
+                    <p> © Issa Valeria Garza Sánchez 1800003</p>
                 </fieldset>
             </div>
-        </FOOTer>
+        </footer>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>

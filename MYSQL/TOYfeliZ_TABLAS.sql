@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS TOYfeliZ;
 CREATE DATABASE IF NOT EXISTS TOYfeliZ;
 USE TOYfeliZ;
  
@@ -171,4 +172,4 @@ FOREIGN KEY (ID_VENDEDOR) REFERENCES usuarios (ID_USUARIO)
 );
 
 INSERT into usuarios(nombre, apellido, nacimiento, usuario, correo, contrasenia, sexo, privacidad, foto, ID_ROL)
-			VALUES ('Blanca', 'Trujillo', '15/05/2001', 'Blankury', 'b@gmail.com', 'contra', 'Mujer', 'Publico', 'imagenes/logo.png', '2');
+			VALUES ('Issa', 'Garza', '15/05/2001', 'Issa', 'issa@gmail.com', 'contra', 'Mujer', 'Publico', 'images/logo.png', '3');

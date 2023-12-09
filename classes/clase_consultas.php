@@ -33,7 +33,8 @@ class Historial extends Dbh {
             $categoria = $row['categoria'];
             $lista_info[] = array("nombre" => $nombre,"ID_VENTA" => $ID_VENTA, "fechaCOMPRA" => $fechaCOMPRA,
             "cantidadCompradaVendida" => $cantidadCompradaVendida, "precioFinalProducto" => $precioFinalProducto,
-            "ID_CLIENTE" => $ID_CLIENTE, "ID_PRODUCTO" => $ID_PRODUCTO, "categoria" => $categoria, "calificación" => $calificación);
+            "ID_CLIENTE" => $ID_CLIENTE, "ID_PRODUCTO" => $ID_PRODUCTO, "categoria" => $categoria, "calificación" => $calificación
+          );
         endforeach;
 
         

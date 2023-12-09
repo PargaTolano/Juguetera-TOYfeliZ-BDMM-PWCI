@@ -35,7 +35,7 @@ class Toys extends Dbh {
 
         foreach($videos as $video):
             $stmt = $this->connect()->prepare('call sp_gestionJuguetes(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
-            if (!$stmt->execute(array(3, $ID_JUGUETE, null, null, null, null, null, null, null, null, null, "videos/".$video, null, null, null))){
+            if (!$stmt->execute(array(3, $ID_JUGUETE, null, null, null, null, null, null, null, null, null, $video, null, null, null))){
                 $stmt = null;
                 echo"error en los videos";
                 //header ("location: ../index.php?error=stmtfailed");
@@ -206,6 +206,7 @@ class Toys extends Dbh {
         }
         
         $juguetes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $lista_info = [];
 
         foreach ($juguetes as $row): 
             $nombre = $row['nombre'];
@@ -264,11 +265,6 @@ class Toys extends Dbh {
             echo 'Comentaste.';
             exit();
         }
-
-
-       
-
-
     }
 }
 

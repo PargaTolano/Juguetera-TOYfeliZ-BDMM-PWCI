@@ -8,7 +8,7 @@ include('./templates/header.php');
     <?php
         if ($_SESSION['ID_ROL'] != 1){   
     ?>
-    <div class="container px-4">
+    <div class="container px-0">
         <div class="row">
             <div class="col-4 separadorDoble">
             </div>
@@ -29,7 +29,7 @@ include('./templates/header.php');
     }
     ?>
 
-    <div class="container px-4"  >
+    <div class="container px-0">
         <div class="row">
             <div class="col-12 col-lg-4 categorías py-2 px-4 bg-light">
 
@@ -87,7 +87,7 @@ include('./templates/header.php');
     </div>
 
 
-    <div class="container px-4">
+    <div class="container px-0">
         <div class="row">
             <div class="col-12 px-4 py-4" style="background-color: pink;">
                 <h4 class="Titulos"> Productos recomendados </h4>

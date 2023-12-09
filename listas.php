@@ -1,24 +1,19 @@
 <?php
 include('./templates/header.php');
 ?>
-<section>
-
-
-<br>
-    <div class="container bg-light text-center" style="padding: 30px; height : 100vh;" >
+  <div class="container">
+    <div class="row bg-light" style="--bs-gutter-x: 3rem;">
+      
+    <div class="text-center" >
         <h1 class="Titulos"> Mis listas </h1>
         <button type="button" id="Crear_lista" class="btn btn-primary btn-info" data-bs-toggle="modal" data-bs-target="#registroModal" > Crear lista </button>
         <hr>
         <div>
-            <ol id="list_container">
-                
-            </ol>
+            <ol id="list_container"></ol>
             <br>
-            <hr>
         </div>
     </div>
-
-
+    </div>
 
     <div class="modal fade" id="registroModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -44,9 +39,7 @@ include('./templates/header.php');
             </form>
         </div>
     </div>
-
-</section>
-
+  </div>
 <?php
 include('./templates/footer.php');
 ?>

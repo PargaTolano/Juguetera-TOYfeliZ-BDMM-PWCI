@@ -141,7 +141,7 @@ delimiter ;
 DROP PROCEDURE IF EXISTS sp_gestionJuguetes;
 delimiter =)
 CREATE procedure sp_gestionJuguetes (pAccion	tinyint,	pID_PRODUCTO INT,	Pnombre VARCHAR(100),	Pdescripcion VARCHAR(500),    PtipoVenta VARCHAR(30),    
-				 Pvaloracion INT,    Pprecio FLOAT,    Pcantidad INT,	pID_VENDEDOR INT, Picono LONGBLOB, Pcategorias INT, Pvideos VARCHAR(500), Pimagenes LONGBLOB,
+				 Pvaloracion INT,    Pprecio FLOAT,    Pcantidad INT,	pID_VENDEDOR INT, Picono LONGBLOB, Pcategorias INT, Pvideos LONGBLOB, Pimagenes LONGBLOB,
                  pID_ADMIN INT, Pautorizadojuguetes BIT)
 BEGIN
 #Altas
@@ -217,7 +217,8 @@ BEGIN
 	if pAccion = 1 then
 		if (SELECT count(ID_COMENTARIO) total from comentarios where ID_JUGUETE = pID_PRODUCTO AND ID_CLIENTE = pID_USUARIO) = 0 then
 			INSERT into comentarios (descripcion, calificación, ID_CLIENTE, ID_JUGUETE) VALUES (Pcomentario, Pcalificación, pID_USUARIO, pID_PRODUCTO);
-            SELECT count(ID_COMENTARIO) total from comentarios where ID_JUGUETE = pID_PRODUCTO AND ID_CLIENTE = pID_USUARIO;
+            # EMPTY SELECT
+            SELECT ID_COMENTARIO from comentarios where ID_COMENTARIO <> ID_COMENTARIO;
 		else
             SELECT count(ID_COMENTARIO) total from comentarios where ID_JUGUETE = pID_PRODUCTO AND ID_CLIENTE = pID_USUARIO;
         end if;
@@ -274,9 +275,10 @@ delimiter &&
 CREATE procedure sp_gestionHistorial (pAccion	tinyint, Pdesde VARCHAR(100), Phasta VARCHAR(100), pID_USUARIO int)
 BEGIN
 	if pAccion = 1 then
-		SELECT a.ID_VENTA, a.fechaCOMPRA, a.cantidadCompradaVendida, a.precioFinalProducto, a.ID_CLIENTE, b.nombre, b.ID_PRODUCTO,  group_concat(distinct e.nombre ) categoria
+		SELECT a.ID_VENTA, a.fechaCOMPRA, a.cantidadCompradaVendida, a.precioFinalProducto, a.ID_CLIENTE, q.calificación, b.nombre, b.ID_PRODUCTO,  group_concat(distinct e.nombre ) categoria
 		FROM pedidosyventas a INNER JOIN juguetes b ON a.ID_JUGUETE = b.ID_PRODUCTO INNER JOIN categoriajuguete c ON a.ID_JUGUETE = c.ID_JUGUETE
-		INNER JOIN  categorias e ON e.ID_CATEGORIA = c.ID_CATEGORIA WHERE a.ID_CLIENTE = pID_USUARIO AND a.fechaCOMPRA between Pdesde and Phasta group by 1;
+		INNER JOIN  categorias e ON e.ID_CATEGORIA = c.ID_CATEGORIA INNER JOIN  comentarios q ON q.ID_JUGUETE = a.ID_JUGUETE 
+        WHERE a.ID_CLIENTE = pID_USUARIO AND a.fechaCOMPRA between Pdesde and Phasta group by 1;
     end if;
 #Seleccion
     if pAccion = 2 then
