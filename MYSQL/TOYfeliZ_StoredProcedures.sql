@@ -172,6 +172,10 @@ BEGIN
 	if pAccion = 6 then
 		SELECT ID_PRODUCTO, nombre, tipoVenta, precio, ID_VENDEDOR, icono, vendedor, ventas FROM viewJuguetesPorVenta order by ventas desc;
     end if;
+	if pAccion = 7 then
+		SELECT a.ID_PRODUCTO, a.nombre, a.tipoVenta, a.precio, a.ID_VENDEDOR, a.icono, a.vendedor, a.ventas FROM viewJuguetesPorVenta a
+        INNER JOIN categoriaJuguete cj ON a.ID_PRODUCTO = cj.ID_JUGUETE AND cj.ID_CATEGORIA = Pcategorias order by ventas desc;
+    end if;
 END =)
 delimiter ;
 

@@ -1,7 +1,11 @@
 getCategorias();
 
+const valores = window.location.search;
+const urlParams= new URLSearchParams(valores);
+const ID_CATEGORIA = urlParams.get("cat");
+
 $.ajax({
-    data: {action: 'getJuguetes'},
+    data: {action: ID_CATEGORIA ? 'getJuguetesCategoria' : 'getJuguetes', ID_CATEGORIA},
     type: "POST",
     url: './controlador/juguetes.php',
     async: false,

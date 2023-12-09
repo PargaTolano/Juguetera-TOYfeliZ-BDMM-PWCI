@@ -64,6 +64,10 @@ class JuguetesControlador extends Toys {
         $this->CargarJuguetes();      
     }
 
+    public function MostrarJuguetesCategoria($ID_CATEGORIA) {
+        $this->CargarJuguetesCategoria($ID_CATEGORIA);
+    }
+
     public function VerJuguete(){
         $this->jugueteIndividual($this->ID_PRODUCTO);      
     }

@@ -7,6 +7,8 @@ if (isset($_POST['action'])){
       getJuguete();
     else if ($action == 'getJuguetes')
       getJuguetes();
+    else if ($action == 'getJuguetesCategoria')
+      getJuguetesCategoria();
     else if ($action == 'getSinAutorizar')
       getSinAutorizar();
     else if ($action == 'Autorizar')
@@ -144,4 +146,10 @@ function Autorizar(){
     $ID_PRODUCTO = $_POST['ID_PRODUCTO'];
     $juguete = new JuguetesControlador("", "", "", "", "", "", "", "", "", $ID_PRODUCTO, "", "");
     $juguete->AutorizarJuguete();    
+}
+
+function getJuguetesCategoria(){
+  $ID_CATEGORIA = $_POST['ID_CATEGORIA'];
+  $juguetes = new JuguetesControlador("", "", "", "", "", "", "", "", "", "", "", "");
+  $juguetes->MostrarJuguetesCategoria($ID_CATEGORIA);
 }

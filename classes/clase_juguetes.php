@@ -195,6 +195,38 @@ class Toys extends Dbh {
         echo json_encode($lista_info);
     }
 
+    protected function CargarJuguetesCategoria($ID_CATEGORIA){
+      $lista_info = array(
+          'jug' => array(),
+          'categs' => 1
+      );
+      $stmt = $this->connect()->prepare('call sp_gestionJuguetes(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
+
+      if (!$stmt->execute(array(7, null, null, null, null, null, null, null, null, null, $ID_CATEGORIA, null, null, null, null))){
+          $stmt = null;
+          echo "error cargando juguetes.";
+          //header ("location: ../index.php?error=stmtfailed");
+          exit();
+      }
+
+      $juguetes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+      foreach ($juguetes as $row): 
+          $nombre = $row['nombre'];
+          $precio = $row['precio'];
+          $tipoVenta = $row['tipoVenta'];
+          $vendedor = $row['vendedor'];
+          $icono = $row['icono'];
+          $ID_PRODUCTO = $row['ID_PRODUCTO'];
+          $ventas = $row['ventas'];
+          $lista_info['jug'][] = array("nombre" => $nombre,"precio" => $precio, "tipoVenta" => $tipoVenta,
+          "vendedor" => $vendedor, "icono" => $icono,  "ID_PRODUCTO" => $ID_PRODUCTO,  "ventas" => $ventas);
+      endforeach;
+
+      $stmt = null; 
+      echo json_encode($lista_info);
+  }
+
 
     protected function CargarJuguetesSINAUTORIZAR(){
         $stmt = $this->connect()->prepare('call sp_gestionJuguetes(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);');
