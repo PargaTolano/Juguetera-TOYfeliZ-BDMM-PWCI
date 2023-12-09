@@ -27,7 +27,7 @@ $.ajax({
                         <button type="button" id="Ver${data[i].ID_JUGUETE}"  value="${data[i].ID_JUGUETE}" class="btn btn-primmary bg-warning VER" style="right: 10px;"> 
                           Ver 
                         </button>
-                        <button type="button" id="Quitar${data[i].ID_PRODUCTO}" value="${data[i].ID_PRODUCTO}" class="btn btn-primmary bg-danger" style="right: 10px;"> 
+                        <button type="button" id="Quitar${data[i].ID_JUGUETE}" value="${data[i].ID_JUGUETE}" class="btn btn-primmary bg-danger QUITAR-CARRITO" style="right: 10px;"> 
                          Quitar 
                         </button> 
                       </div>

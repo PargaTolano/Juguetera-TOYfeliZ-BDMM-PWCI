@@ -6,12 +6,15 @@ $(document).ready(function(){
             url: './controlador/consultas.php',
             async: false,
             success: function(result){
-                alert(result);
-                $("#pedidos").empty();
-
-                var data = JSON.parse(result);
-                for (let i = 0; i < data.length;i++){
-                    $("#pedidos").append('<span> <b> Fecha: </b></span> <span> '+ data[i].fechaCOMPRA + '</span> <br> <br>  <div class="row"> <div class="col-3"> <span> ' + data[i].nombre + ' </span> </div> <div class="col-3"> <div class="row"> <div class="col-6"> <span> '+ data[i].cantidadCompradaVendida + ' </span></div> <div class="col-6"> <span> ' + data[i].precioFinalProducto + ' </span>  </div> </div> </div> <div class="col-3"> <span> '+ data[i].categoria +' </span> </div> <div class="col-3"> <span> '+ data[i].calificación +' </span> </div> </div>');
+                try {
+                  $("#pedidos").empty();
+  
+                  var data = JSON.parse(result);
+                  for (let i = 0; i < data.length;i++){
+                      $("#pedidos").append('<span> <b> Fecha: </b></span> <span> '+ data[i].fechaCOMPRA + '</span> <br> <br>  <div class="row"> <div class="col-3"> <span> ' + data[i].nombre + ' </span> </div> <div class="col-3"> <div class="row"> <div class="col-6"> <span> '+ data[i].cantidadCompradaVendida + ' </span></div> <div class="col-6"> <span> ' + data[i].precioFinalProducto + ' </span>  </div> </div> </div> <div class="col-3"> <span> '+ data[i].categoria +' </span> </div> <div class="col-3"> <span> '+ data[i].calificación +' </span> </div> </div>');
+                  }
+                } catch {
+                  alert(result);
                 }
             },
             error: function(result){

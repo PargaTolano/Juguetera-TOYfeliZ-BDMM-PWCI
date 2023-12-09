@@ -46,6 +46,11 @@ class ListasControlador extends Listas {
         echo "Se agrego el producto.";
     }
 
+    public function RemoverProducto() {
+      $this->RemoverDeseo($this->ID_PRODUCTOS, $this->ID_LISTA, $this->ID_CLIENTE);
+      echo "Se removio el producto.";
+    }
+
     private function inputVacio(){
         $check;
         if (empty ($this->nombre) || empty ($this->descripcion) || empty ($this->imagenes)|| empty ($this->privacidad)||

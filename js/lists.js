@@ -25,7 +25,7 @@ if (ID_LISTA)
                 $("#deseos").append(`
                 <img src="${data['productos'][i].icono}" style="object-fit: cover;" width=150px height=150px>
                 <p>${data['productos'][i].nombre}</p> 
-                <button type="button" id="retirarDeLista" class="btn btn-primary btn-info"> Quitar </button> 
+                <button type="button" class="btn btn-primary btn-info QUITAR-LISTA"  value="${ID_LISTA}-${data['productos'][i].ID_PRODUCTO}"> Quitar </button> 
                 <button type="button" id="Ver${data['productos'][i].ID_PRODUCTO}" value="${data['productos'][i].ID_PRODUCTO}" class="btn btn-primmary bg-warning VER" style="right: 10px;"> 
                   Ver 
                 </button>  

@@ -169,7 +169,7 @@ $(document).ready(function(){
             success: function(result) {
                 alert(result);
             }, error: function(result){
-                alert("Error en el php" + result);
+                alert("Error en el php" + result.responseText);
             }
         })
     });

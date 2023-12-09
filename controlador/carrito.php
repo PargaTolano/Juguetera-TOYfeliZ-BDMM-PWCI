@@ -8,6 +8,8 @@ if (isset($_POST['action'])){
     getcarrito();
     else if ($action == 'agregarproducto')
     agregarproducto();
+    else if ($action == 'removerproducto')
+    removerproducto();
     else if ($action == 'totalpagar')
     totalpagar();
     else if ($action == 'deleteJuguetefromCarrito')
@@ -34,6 +36,16 @@ function agregarproducto(){
 
     $carrito = new CarritoControlador("", $cantidad, "", $ID_USUARIO, "", $ID_PRODUCTO);
     $carrito->Agregarproductos();
+}
+
+function removerproducto() {
+  session_start();
+  $ID_USUARIO = $_SESSION['ID_USUARIO'];
+
+  $ID_PRODUCTO = $_POST['ID_PRODUCTO'];
+
+  $carrito = new CarritoControlador("", "", "", $ID_USUARIO, "", $ID_PRODUCTO);
+  $carrito->Removerproducto();
 }
 
 function totalpagar(){

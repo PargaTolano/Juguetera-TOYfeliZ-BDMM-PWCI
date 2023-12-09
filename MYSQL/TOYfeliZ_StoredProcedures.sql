@@ -127,6 +127,9 @@ BEGIN
     if pAccion = 8 then
 		SELECT ruta FROM imageneslistas where ID_LISTA = PID_LISTA;
 	end if;
+    if pAccion = 9 then
+		DELETE FROM deseos WHERE ID_LISTA = PID_LISTA AND ID_JUGUETE = pID_PRODUCTO;
+	end if;
 END %%
 delimiter ;
 
@@ -265,7 +268,7 @@ Set tipoventa_tmp = (SELECT tipoVenta from juguetes where ID_PRODUCTO = pID_PROD
     end if;
 #Eliminar producto///
 	if pAccion = 6 then
-		INSERT into poductoscarrito (ID_CARRITO, ID_JUGUETE, cantidadCompra) VALUES (ID_CARRITO_tmp, pID_PRODUCTO, 1);
+		DELETE FROM poductoscarrito where ID_CLIENTE = pID_CLIENTE AND ID_JUGUETE AND pID_PRODUCTO;
     end if;
 END ==
 delimiter ;

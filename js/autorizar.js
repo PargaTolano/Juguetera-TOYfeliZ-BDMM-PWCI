@@ -23,11 +23,10 @@
 
 $(document).ready(function(){  
     $("#Autorizar").click(function(){
-        alert(ID_PRODUCTO);
         $.ajax({
             type: "POST",
             url: './controlador/juguetes.php',
-            data: {action: 'Autorizar', ID_PRODUCTO: ID_PRODUCTO }, 
+            data: {action: 'Autorizar', ID_PRODUCTO }, 
             success: function(result) {
                 alert(result);
             }, error: function(result){

@@ -2,9 +2,10 @@
 include('./templates/header.php');
 ?>
 
-<section>
+<div class="container">
   <br>
-  <div class="container bg-light text-center" style="padding: 30px">
+  <div class="row bg-light">
+    <div class="text-center">
       <h1 class="Titulos" id="nombre_lista"> Unknown </h1>
       <label > Fecha de creación: </label> <label id="fecha_lista"> </label> <br>
       <label > Descripción: </label> <label id="desc_list"> Unknown </label> <br>
@@ -16,9 +17,9 @@ include('./templates/header.php');
       <hr>
       <div id ="deseos">
           
-      </div>
+    </div>
   </div>
-</section>
+</div>
 
 <?php
 include('./templates/footer.php');

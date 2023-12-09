@@ -53,6 +53,7 @@ function infoperfil(){
         url: './controlador/perfil.php',
         async: false,
         success: function(result){
+          try {
             const data = JSON.parse(result);
             if (!data.length) return;
 
@@ -85,6 +86,9 @@ function infoperfil(){
                 $("#perfilbuttons").append(' <button type="button" id="Editar" class="btn btn-primary btn-info"> Editar </button> <button type="button" id="BorrarCuenta" class="btn btn-primary btn-info"> Desactivar Cuenta </button> <button type="button" id="cerrarSesion" class="btn btn-primary btn-info"> Cerrar Sesion </button>');
 
             }
+          } catch {
+            alert(result);
+          }
                     
         },
         error: function(result){

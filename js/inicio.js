@@ -6,6 +6,7 @@ $.ajax({
     url: './controlador/juguetes.php',
     async: false,
     success: function(result){
+      try {
         var data = JSON.parse(result);
         for (let i = 0; i < data['jug'].length;i++){
             if (data['jug'][i].tipoVenta == "Cotizar"){
@@ -74,6 +75,9 @@ $.ajax({
                 </div><hr>`);
             }
         }
+      } catch {
+        alert(result);
+      }
     },
     error: function(result){
         console.log("La solicitud regreso con un error: " + result);
@@ -82,7 +86,6 @@ $.ajax({
 
 
 $(document).ready(function(){
-    
     $.ajax({
         data: {action: 'getlistas'},
         type: "POST",
@@ -145,6 +148,57 @@ $(document).ready(function(){
     $(".VER").click(function(){
         window.location.href = "producto.php?ID_PRODUCTO=" + $(this).val() ;
     });
+    $(".QUITAR-LISTA").click(function(){
+      const [ID_LISTA,ID_PRODUCTO] = $(this).val().split('-');
+      $.ajax({
+          data: {action: 'removeFromList', ID_LISTA, ID_PRODUCTO},
+          type: "POST",
+          url: './controlador/listas.php',
+          async: false,
+          success: function(result){
+            alert(result);
+            window.location.reload();
+          },
+          error: function(result){
+              console.log("La solicitud regreso con un error: " + result.responseText);
+          }  
+      });
+    });
+    $(".QUITAR-CARRITO").click(function(){
+      const ID_PRODUCTO = $(this).val();
+      
+      $.ajax({
+        type: "POST",
+        url: './controlador/carrito.php',
+        data: {ID_PRODUCTO, action: 'removerproducto'}, 
+        success: function(result) {
+            alert(result);
+            window.location.reload();
+        }, error: function(result){
+            alert("Error en el php" + result.responseText);
+        }
+    })
+
+      $.ajax({
+          data: {action: 'removeFromList', ID_CARRITO, ID_PRODUCTO},
+          type: "POST",
+          url: './controlador/listas.php',
+          async: false,
+          success: function(result){
+            try {
+              const data = JSON.parse(result);
+              alert(data);
+            } catch (err) {
+              alert(result);
+            }
+            window.location.reload();
+          },
+          error: function(result){
+              console.log("La solicitud regreso con un error: " + result.responseText);
+          }  
+      });
+    });
+    });
    
     $("#form_listas").submit(function(event){
         $.ajax({
@@ -162,7 +216,7 @@ $(document).ready(function(){
               alert(result.responseText);
                 alert("Error en el php" + result);
             }
-        })
+        });
         return false;
     });
 
@@ -192,8 +246,6 @@ $(document).ready(function(){
             event.preventDefault();
         }
     });
-
-});
 
 function campoVacioCat(){
     if($("#nombreCateg").val().length < 1) {

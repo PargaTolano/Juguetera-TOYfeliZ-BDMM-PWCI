@@ -36,6 +36,18 @@ class Listas extends Dbh {
         
         $stmt = null; 
     }
+
+    protected function RemoverDeseo($ID_JUGUETE, $ID_LISTA, $ID_CLIENTE){
+      $stmt = $this-> connect()-> prepare('CALL sp_gestionListas (?, ?, ?, ?, ?, ?, ?, ?);');	
+      if (!$stmt->execute(array(9, $ID_LISTA, null, null, $ID_CLIENTE, null, null, $ID_JUGUETE))){
+          $stmt = null;
+          header ("location: ../index.php?error=stmtfailed");
+          exit();
+      }
+      
+      $stmt = null; 
+  }
+
     protected function CargarListas($ID_CLIENTE){
         $stmt = $this-> connect()-> prepare('CALL sp_gestionListas (?, ?, ?, ?, ?, ?, ?, ?);');	
         if (!$stmt->execute(array(6, null, null, null, $ID_CLIENTE, null, null, null))){

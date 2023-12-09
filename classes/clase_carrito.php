@@ -89,6 +89,18 @@ class Carrito extends Dbh {
         $stmt = null; 
     } 
 
+    protected function remover($ID_CLIENTE, $ID_PRODUCTO){
+      $stmt = $this->connect()->prepare('CALL sp_gestionCarrito (?, ?, ?, ?, ?)');
+
+      if (!$stmt->execute(array(6, $ID_PRODUCTO, $ID_CLIENTE, null, null))){
+          $stmt = null;
+          header ("location: ../index.php?error=stmtfailed");
+          exit();
+      }
+
+      $stmt = null; 
+  } 
+
     
 }
 

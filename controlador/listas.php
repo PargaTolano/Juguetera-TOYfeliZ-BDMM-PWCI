@@ -8,6 +8,8 @@ if (isset($_POST['action'])){
     getlistas();
     else if ($action == 'setTOlist')
     setTOlist();
+    else if ($action == 'removeFromList')
+    removeFromList();
     else if ($action == 'getlistaINFO')
     getlistaINFO();
     else if ($action == 'getlistaspublicas')
@@ -70,4 +72,13 @@ function setTOlist(){
     $ID_PRODUCTO = $_POST['ID_PRODUCTO'];
     $juguete = new ListasControlador("", "", "", "", $ID_USUARIO, $ID_LISTA ,$ID_PRODUCTO);
     $juguete->Agregarproducto();    
+}
+
+function removeFromList() {
+  session_start();
+  $ID_USUARIO = $_SESSION['ID_USUARIO'];
+  $ID_LISTA = $_POST['ID_LISTA'];
+  $ID_PRODUCTO = $_POST['ID_PRODUCTO'];
+  $juguete = new ListasControlador("", "", "", "", $ID_USUARIO, $ID_LISTA ,$ID_PRODUCTO);
+  $juguete->RemoverProducto();    
 }

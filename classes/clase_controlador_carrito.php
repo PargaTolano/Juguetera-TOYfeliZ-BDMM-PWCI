@@ -31,6 +31,11 @@ class CarritoControlador extends Carrito {
         echo "Se agrego el producto.";
     }
 
+    public function Removerproducto(){
+      $this->remover($this->ID_CLIENTE, $this->ID_PRODUCTOS);
+      echo "Se removio el producto.";
+    }
+
     public function vaciartodo(){
         $this->vaciar($this->ID_CLIENTE);
     }
